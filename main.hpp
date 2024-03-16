@@ -1,52 +1,57 @@
-#include "main.cpp"
+#ifndef MAIN_HPP
+#define MAIN_HPP
+
 #include <iostream> 
 #include <fstream>
 #include <string> 
-#include <vector> 
+using namespace std; 
+
+int writeFile(); 
+int readFile();
 
 int writeFile() {
-    ofstream file("employee.txt"); 
-    if (!file.is_open()) {
-        cout << "Error: Unable to open file!" >> endl; 
+    int numEmployees; 
+    std::cout << "Enter the number of employees: "; 
+    std::cin >> numEmployees; 
+
+    std::ofstream outFile("employee.txt"); 
+    if (!outFile) {
+        std:: cerr << "Error opening file for writing." << std::endl; 
         return 0; 
     }
 
-    int numEmployees; 
-    cout << "Enter the number of employees: "; 
-    cin >> numEmployees; 
-
-    cin.ignore(); 
-
-    int employeeCount = 0; 
     for (int i = 0; i < numEmployees; i++) {
-        string employeeInfo; 
-        cout << "Enter employee information (id name department salary): "; 
-        getline(cin, employeeInfo); 
-        file << employeeInfo << endl; 
-        employeeCount++
+        int id; 
+        string name, department; 
+        double salary; 
+
+        std::cout << "Enter employee ID, name, department, and salary: "; 
+        std::cin >> id >> name >> department >> salary; 
+
+        outFile << id << " " << name << " " << department << " " << salary << std::endl; 
+
     }
 
-    file.close(); 
-    return employeeCount; 
+    outFile.close(); 
+    return numEmployees; 
 }
 
 int readFile() {
-    ifstream() {
-        ifstream file("employee.txt"); 
-        if (!file.is_open()) {
-            cout << "Errorr: Unable to open file!" << endl; 
-            return 0; 
-        }
+    int numEmployees = 0; 
+    std::ifstream inFile("employee.txt"); 
+    if (!inFile) {
+        std::cerr << "Error opening file for reading." << std::endl; 
+        return 0; 
     }
 
-    int employeeCount = 0; 
-    string line; 
-    cout << "Employee Information: " << endl; 
-    while (getLine(file, line)) {
-        cout << line << endl; 
-        employeeCount++; 
+    std::string line; 
+    while (std::getline(inFile, line)) {
+        std::cout << line << std::endl; 
+        numEmployees++
     }
 
-    file.close(); 
-    return employeeCount; 
+    inFile.close(); 
+    return numEmployees; 
 }
+
+#endif 
